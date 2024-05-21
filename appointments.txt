@@ -1,0 +1,44 @@
+Criar projecto com typescript
+Inicializar o Projeto Node.js
+  npm init -y
+
+Instalar o TypeScript
+npm install --save-dev typescript
+
+Configurar o TypeScript
+npx tsc --init
+
+Instalar Pacotes Adicionais
+npm install express @types/express --save
+npm install --save-dev @types/node
+
+
+docker build -t rubemnascimento81/ci-ts .
+
+GIT
+1ª Vez
+git init
+git add .
+git commit -m "setup project"
+git branch -M main
+git remote add origin https://github.com/SparkTech-BSS/ventus-api.git
+git push -u origin main
+
+Outras vezes
+git add . ou git add {nome_arquivo}
+git commit -m "mensagem"
+git push -u origin main ou caso for na branch insira git push -u origin {nome_branch}
+
+Nova branch
+git checkout -b "nome_branch"
+git add -A
+git commit -m "Create auth feature and added insomnia requests"
+git push origin nome_branch
+
+Juntar a branch à main
+git checkout main
+git merge auth
+git push origin main
+
+Deletar uma branch local
+git branch -d {nome_branch} 
