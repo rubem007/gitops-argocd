@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- deployment.yaml
+- service.yaml
+
+images:
+- name: app-express
+  newName: rubemnascimento81/gitops-argocd
+  newTag: 209417beed0c8bb74c00c7c2c3917542dcd0cc65
