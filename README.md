@@ -26,4 +26,26 @@ Ter nodejs instalado https://nodejs.org/en/download/package-manager
  5 - Escolha um nome para o seu access token
  6 - Clique em Copy and Close
 
+Como habilitar o GITHUB_TOKEN?
+  1 - Dentro do repositório, clique em Settings
+  2 - No menu que esta no lado esquerdo, clique em Actions, e depois clique em General
+  3 - Escolha a opção Read and write permissions em Workflow Permissions
+  4 - Clique em Save
+2 
+
+3 - Criar o Kind no docker
+Para criar o kind no docker, execute os seguintes comandos no CMD:
+ kind create cluster
+ Apos a criação rode o seguinte comando
+ kubectl cluster-info --context kind-kind
+
+4 - Instalar o ArgoCD
+
+1 - Rode o seguinte comando
+  kubectl create namespace argocd
+  kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+- Recuperar a senha (No powershell)
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | 
+    ForEach-Object { [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($_)) };
 
