@@ -7,5 +7,5 @@ resources:
 
 images:
 - name: app-express
-  newName: rubemnascimento81/gitops-argocd
+  newName: rubemnascimento81/app-express
   newTag: 209417beed0c8bb74c00c7c2c3917542dcd0cc65

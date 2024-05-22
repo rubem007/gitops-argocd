@@ -65,3 +65,8 @@ ATT: copie esta senha para usa-la no momento do Login
  Password: insira a senha do ponto 2.
 
 Creating Apps Via UI
+
+
+Referencias
+
+https://opengitops.dev/

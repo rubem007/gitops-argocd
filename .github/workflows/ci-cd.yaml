@@ -3,7 +3,7 @@ name: GitOps
 on:
   push:
     branches: [main]
-  
+
   workflow_dispatch:
 
 jobs:
@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: "20.x"
 
       - name: Install dependecies
         run: npm install --prefix ./app
@@ -40,13 +40,38 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
+
       - name: Build and Push Image to Docker Hub
         uses: docker/build-push-action@v5
         with:
           context: ./app
           file: ./app/Dockerfile
           push: true
-          tags: | 
-            ${{ secrets.DOCKERHUB_USERNAME }}/gitops-argocd:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/gitops-argocd:${{ github.sha }}
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/app-express:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/app-express:${{ github.sha }}
+
+      - name: Setup Kustomize
+        uses: imranismail/setup-kustomize@v1
+        with:
+          kustomize-version: "3.6.1"
+
+      - name: Update Kubernetes Resources
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        run: |
+          cd k8s
+          kustomize edit set image app-express=$DOCKER_USERNAME/app-express:$GITHUB_SHA
+
+      - name: Commit
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -am "Bump docker version"
+
+      - name: Push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN  }}
+          repository: rubem007/gitops-argocd
+          branch: main
