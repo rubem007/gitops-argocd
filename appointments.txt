@@ -12,6 +12,9 @@ Instalar Pacotes Adicionais
 npm install express @types/express --save
 npm install --save-dev @types/node
 
+Adicionar Jest para testes
+npm install -D jest ts-jest @types/jest
+npx ts-jest config:init
 
 docker build -t rubemnascimento81/ci-ts .
 

@@ -23,7 +23,6 @@ jobs:
       - name: Install dependecies
         run: npm install --prefix ./app
 
-
       - name: Test
         run: npm test --prefix ./app
 
