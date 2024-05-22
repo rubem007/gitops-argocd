@@ -58,10 +58,10 @@ jobs:
 
       - name: Update Kubernetes Resources
         env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         run: |
           cd k8s
-          kustomize edit set image app-express=$DOCKER_USERNAME/app-express:$GITHUB_SHA
+          kustomize edit set image app-express=$DOCKERHUB_USERNAME/app-express:$GITHUB_SHA
 
       - name: Commit
         run: |
