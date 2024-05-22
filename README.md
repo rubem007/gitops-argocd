@@ -65,8 +65,35 @@ ATT: copie esta senha para usa-la no momento do Login
  Password: insira a senha do ponto 2.
 
 Creating Apps Via UI
+5 - Criando a App
+ 1 - Abra o navegador e faça login usando as credenciais definidas do ponto 4.
+ 2 - Clique no botão + New App, conform mostrado abaixo:
+    imagem
+ 3 - Insira um nome (sem espaço) no campo Application Name, no campo Project deixe como default e SYNC POLICY Manual
+    imagem
+ 4 - Conecte a url do repositório https://github.com/rubem007/gitops-argocd
+   Insira a url do respositorio no campo Repository URL https://github.com/rubem007/gitops-argocd
+   Selecione k8s no campo Path 
+   DESTINATION
+   Selecione https://kubernetes.default.svc no campo Cluster URL
+   Insira default no campo Namespace
+    Imagem
+  
+  Como estamos a usar o Kustomize, automaticamente ele mostrará a images actual
+    imagem
+  
+  Clique em CREATE para criar a App
 
+  Após a criação aparecerá ..., como mostrado abaixo
+  imagem 6
+
+Na imagem acima, repare que o status está outOfSync, isso quer dizer que o argo CD não pegou a actualização atual da aplicação.
+existem novas alterações que foram feitas no repositório git, mas ainda não foram aplicadas no k8s.
+há uma divergência entre o que está atualmente implementado no k8s e o que deveria estar no repositório
+
+Para que esteja tudo sincronizado, basta clicar no botão SYNC que encontra-se no card
+Após está operação o status vai mudar para Synced
 
 Referencias
-
+https://argo-cd.readthedocs.io/en/stable/
 https://opengitops.dev/
