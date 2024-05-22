@@ -8,7 +8,7 @@ RUN npm ci
 
 COPY . .
 
-EXPOSE 300
+EXPOSE 3000
 RUN npm run build
 
 CMD ["node", "dist/main.js"]
