@@ -7,5 +7,5 @@ resources:
 
 images:
 - name: app-express
-  newName: rubemnascimento81/app-express
-  newTag: 209417beed0c8bb74c00c7c2c3917542dcd0cc65
+  newName: /app-express
+  newTag: 505ec7d7a635edb0f4891d5c94c87d6b63b48e99
