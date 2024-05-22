@@ -33,7 +33,7 @@ Como habilitar o GITHUB_TOKEN?
   3 - Escolha a opção Read and write permissions em Workflow Permissions
   4 - Clique em Save
 
-2 - Configurar os arquivos do k8s
+2 - Configurar os manifestos do k8s
 
 
 3 - Criar o Kind no docker
