@@ -96,12 +96,12 @@ Para criar a sua app, siga os seguintes passos:
 2 - Clique no botão **+ New App**, conforme mostrado abaixo: <br>
     ![ArgoCD](https://github.com/rubem007/gitops-argocd/blob/main/images/1.webp "ArgoCD")
   <br>
-3 - Preencha o Formulário
- - GENERAL
-   - Insira um nome (sem espaço) no campo **Application Name**
-   - No campo **Project** deixe como default
-   - Escolha Manual no campo **SYNC POLICY** 
-<br>
+3 - Preencha o Formulário <br>
+  
+  - GENERAL
+    - Insira um nome (sem espaço) no campo **Application Name**
+    - No campo **Project** deixe como default
+    - Escolha Manual no campo **SYNC POLICY** <br>
 ![ArgoCD](https://github.com/rubem007/gitops-argocd/blob/main/images/2.png "ArgoCD")
 
   - SOURCE  
