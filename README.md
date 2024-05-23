@@ -18,59 +18,58 @@ Nesse projeto mostraremos como implementar o ArgoCD para Continuos Delivery do n
 :warning: Instalar o nodejs (https://nodejs.org/en/download/package-manager)
 
 ## Implementando o projeto
-1 - Faça fork do projeto
 
-2 - Adicione as Variáveis de Ambiente (DOCKERHUB_USERNAME e DOCKERHUB_TOKEN) <br>
- Eis o passo a passo para adicionar as Variáveis de Ambiente: <br>
-  1 - Dentro do repositório, clique em Settings <br>
-  2 - No menu que esta no lado esquerdo, clique em Secrets and Variables, e depois clique em Actions <br>
-  3 - Clique em New repository secret
-  - Name: `DOCKERHUB_USERNAME`
-  - Secret: Insira o username do seu docker hub
+1. Faça fork do projeto
+2. Adicione as Variáveis de Ambiente (DOCKERHUB_USERNAME e DOCKERHUB_TOKEN) <br>
+  Eis o passo a passo para adicionar as Variáveis de Ambiente: 
+    - Dentro do repositório, clique em Settings <br>
+    - No menu que esta no lado esquerdo, clique em Secrets and Variables, e depois clique em Actions <br>
+    - Clique em **New repository secret**
+      - Name: `DOCKERHUB_USERNAME`
+      - Secret: Insira o username do seu docker hub
+3. Clique em **Add secret**, para salvar
   
-4 - Clique em add secret, para salvar
+Caso não saiba como gerar o token do docker hub, siga este passo a passo:
+- Acesse o Docker Hub  (https://hub.docker.com/) <br>
+- Clique em My Account <br>
+- Clique em Security <br>
+- Clique em  New Access Token <br>
+- Escolha um nome para o seu access token <br>
+- Clique em Copy and Close
 
-Caso não saiba como gerar o token do docker hub, siga este passo a passo: <br>
- 1 - Acesse o Docker Hub  (https://hub.docker.com/) <br>
- 2 - Clique em My Account <br>
- 3 - Clique em Security <br>
- 4 - Clique em  New Access Token <br>
- 5 - Escolha um nome para o seu access token <br>
- 6 - Clique em Copy and Close
+Habilite o `GITHUB_TOKEN` seguindo este passo a passo: <br>
+- Dentro do repositório, clique em Settings <br>
+- No menu que esta no lado esquerdo, clique em **Actions**, e depois clique em **General** 
+- Escolha a opção **Read and write permissions** em Workflow Permissions <br>
+- Clique em **Save**
 
-Habilite o GITHUB_TOKEN seguindo este passo a passo: <br>
-1 - Dentro do repositório, clique em Settings <br>
-2 - No menu que esta no lado esquerdo, clique em Actions, e depois clique em General <br>
-3 - Escolha a opção Read and write permissions em Workflow Permissions <br>
-4 - Clique em Save
-
-3 - Criar o cluster no docker <br>
-Para criar o cluster no docker, execute o seguinte comando no CMD:
+4. Criar o cluster no docker <br>
+- Para criar o cluster no docker, execute o seguinte comando no CMD
 ```
- kind create cluster
+kind create cluster 
 ```
- Após a criação do cluster, execute o seguinte comando
+ - Após a criação do cluster, execute o seguinte comando
  ```
- kubectl cluster-info --context kind-kind
+kubectl cluster-info --context kind-kind
 ```
 
 ### Configurando o ArgoCD
-1 - Instalar o ArgoCD no K8s <br>
+1. Instalar o ArgoCD no K8s <br>
 
-Execute os seguintes comandos no CMD:
+Execute os seguintes comandos no CMD
+
 ```
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-```
-
+```    
 Para verificar se os Pods foram inicializados, execute o seguinte comando
 ```
 kubectl get pods -n argocd
 ```
 Os Pods devem estar com o `STATUS=Running`. Caso  contrário é porque ainda estão a inicializar
 
-2 - Recuperar a senha (No powershell) <br>
-No Windows, abra o powershell e execute o seguinte comando:
+2. Ver a senha (No powershell) <br>
+   No Windows, abra o powershell e execute o seguinte comando:
 ```
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | 
 ForEach-Object { [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($_)) };
@@ -78,26 +77,25 @@ ForEach-Object { [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBa
 
 :warning: ATT: copie esta senha para usá-la no momento do Login
 
-3 - Acessando o ArgoCD <br>
+3. Acessando o ArgoCD <br>
 Para acessar o ArgoCD, habilite antes o port forward executando o seguinte comando no CMD:
 ```
 kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```
 
-4 - Login <br>
+4. Login <br>
 Acesse a seguinte url para fazer Login no ArgoCD
-- Url: `http://localhost:8080`
-- Username: `admin`
-- Password: insira a senha do ponto 2.
+    - Url: `http://localhost:8080`
+    - Username: `admin`
+    - Password: insira a senha do ponto 2.
 
 #### Criar App via UI
 Para criar a sua app, siga os seguintes passos:
-1 - Abra o navegador e faça login usando as credenciais definidas do ponto 4. <br> 
-2 - Clique no botão **+ New App**, conforme mostrado abaixo: <br>
+1. Abra o navegador e faça login usando as credenciais definidas do ponto 4. <br> 
+2. Clique no botão **+ New App**, conforme mostrado abaixo: <br>
     ![ArgoCD](https://github.com/rubem007/gitops-argocd/blob/main/images/1.webp "ArgoCD")
   <br>
-3 - Preencha o Formulário <br>
-  
+3. Preencha o Formulário <br>
   - GENERAL
     - Insira um nome (sem espaço) no campo **Application Name**
     - No campo **Project** deixe como default
@@ -117,9 +115,8 @@ Para criar a sua app, siga os seguintes passos:
 Como estamos a usar o Kustomize, automaticamente ele mostrará a imagem actual, como mostrado na imagem abaixo <br>
 ![ArgoCD](https://github.com/rubem007/gitops-argocd/blob/main/images/5.png "ArgoCD")
   
-4 - Clique em CREATE para criar a App
-
-Após a criação aparecerá um card, como mostrado abaixo <br>
+4. Clique em CREATE para criar a App <br>
+  Após a criação aparecerá um card, como mostrado abaixo <br>
 ![ArgoCD](https://github.com/rubem007/gitops-argocd/blob/main/images/6.png "ArgoCD")
 
 Na imagem acima, repare que o status está `outOfSync`, isso significa que há uma divergência entre o que está atualmente implementado no k8s e o que deveria estar no repositório. <br>
