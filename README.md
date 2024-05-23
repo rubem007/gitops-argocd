@@ -55,7 +55,7 @@ Para criar o cluster no docker, execute os seguintes comandos no CMD:
 ```
 
 ### Configurando o ArgoCD
-1 - Instalar o ArgoCD no K8s
+1 - Instalar o ArgoCD no K8s <br>
 
 Execute os seguintes comandos no CMD:
 ```
@@ -76,7 +76,7 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 ForEach-Object { [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($_)) };
 ```
 
-ATT: copie esta senha para usá-la no momento do Login
+:warning: ATT: copie esta senha para usá-la no momento do Login
 
 3 - Acessando o ArgoCD <br>
 Para acessar o ArgoCD, habilite antes o port forward executando o seguinte comando no CMD:
@@ -99,6 +99,7 @@ Para criar a sua app, siga os seguintes passos:
  - Insira um nome (sem espaço) no campo **Application Name**
  - No campo **Project** deixe como default
  - Escolha Manual no campo **SYNC POLICY** 
+  <br>
     ![ArgoCD](https://github.com/rubem007/gitops-argocd/blob/main/images/2.png "ArgoCD")
   
  2 - Conecte a url do repositório https://github.com/rubem007/gitops-argocd
@@ -107,8 +108,8 @@ Para criar a sua app, siga os seguintes passos:
   ![ArgoCD](https://github.com/rubem007/gitops-argocd/blob/main/images/3.png "ArgoCD")
 
    3 - DESTINATION <br>
-   - Selecione https://kubernetes.default.svc no campo **Cluster URL**
-   - Insira default no campo **Namespace** <br>
+   - Selecione ``https://kubernetes.default.svc`` no campo **Cluster URL**
+   - Insira ``default`` no campo **Namespace** <br>
     ![ArgoCD](https://github.com/rubem007/gitops-argocd/blob/main/images/4.png "ArgoCD")
   
   Como estamos a usar o Kustomize, automaticamente ele mostrará a imagem actual, como mostrado na imagem abaixo <br>
@@ -129,8 +130,7 @@ Para rodar a app execute o seguinte comando
 kubectl port-forward service/app-express-service 3000:3000
 ```
 
-Abra o navegador e insira a seguinte URL
-http:localhost:3000
+Abra o navegador e insira a seguinte URL ``http:localhost:3000``
 
 ## Referências
 <a href="https://argo-cd.readthedocs.io/en/stable/" target="_blank">Documentação Oficial do ArgoCD</a><br>
